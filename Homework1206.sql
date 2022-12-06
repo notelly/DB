@@ -96,11 +96,8 @@ FROM employees;
 
 --9. 사원의 이름과 커미션을 표시하는 질의를 작성하시오. 커미션을 받지 않는 사원일 경우 “No Commission”을 표시하시오.
 --열 레이블은 COMM으로 지정하시오.
-
-SELECT first_name, commission_pct,
-        CASE WHEN NVL(commission_pct,0) <> 0 THEN commission_pct
-             WHEN NVL(commission_pct,0) = 0 THEN "No Commission"
-        END
+--TO_CHAR를 넣어주어야 오류가 
+SELECT first_name, NVL(TO_CHAR(commission_pct), 'No Commission') AS COMM
 FROM employees;
 
 
