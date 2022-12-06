@@ -1,45 +1,45 @@
 SELECT *
 FROM employees;
 --1202
---2. EMPLOYEES Å×ÀÌºíÀÇ ±¸Á¶¸¦ Ç¥½ÃÇÏ½Ã¿À. »ç¿ø ¹øÈ£°¡ °¡Àå ¾Õ¿¡ ¿À°í ÀÌ¾î¼­ °¢ »ç¿øÀÇ ÀÌ¸§, ¾÷¹« ÄÚµå, ÀÔ»çÀÏÀÌ ¿Àµµ·Ï ÁúÀÇ¸¦ ÀÛ¼ºÇÏ½Ã¿À.
---HIRE_DATE ¿­¿¡ STARTDATE¶ó´Â º°ÄªÀ» ÁöÁ¤ÇÏ½Ã¿À. 
+--2. EMPLOYEES í…Œì´ë¸”ì˜ êµ¬ì¡°ë¥¼ í‘œì‹œí•˜ì‹œì˜¤. ì‚¬ì› ë²ˆí˜¸ê°€ ê°€ìž¥ ì•žì— ì˜¤ê³  ì´ì–´ì„œ ê° ì‚¬ì›ì˜ ì´ë¦„, ì—…ë¬´ ì½”ë“œ, ìž…ì‚¬ì¼ì´ ì˜¤ë„ë¡ ì§ˆì˜ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+--HIRE_DATE ì—´ì— STARTDATEë¼ëŠ” ë³„ì¹­ì„ ì§€ì •í•˜ì‹œì˜¤. 
 DESC employees;
 
 SELECT employee_id, first_name, department_id, hire_date AS STARTDATE
 FROM employees;
 
---3. EMPLOYEES Å×ÀÌºíÀÇ ¾÷¹« ÄÚµå¸¦ Áßº¹µÇÁö ¾Ê°Ô Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+--3. EMPLOYEES í…Œì´ë¸”ì˜ ì—…ë¬´ ì½”ë“œë¥¼ ì¤‘ë³µë˜ì§€ ì•Šê²Œ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
 
 SELECT DISTINCT department_id
 FROM employees;
 
---5. ¾÷¹« ID¿Í ÀÌ¸§À» ¿¬°áÇÑ ´ÙÀ½ ½°Ç¥ ¹× °ø¹éÀ¸·Î ±¸ºÐÇÏ¿© Ç¥½ÃÇÏ°í ¿­ ÀÌ¸§À» Employee and Title·Î ÁöÁ¤ÇÏ½Ã¿À.
+--5. ì—…ë¬´ IDì™€ ì´ë¦„ì„ ì—°ê²°í•œ ë‹¤ìŒ ì‰¼í‘œ ë° ê³µë°±ìœ¼ë¡œ êµ¬ë¶„í•˜ì—¬ í‘œì‹œí•˜ê³  ì—´ ì´ë¦„ì„ Employee and Titleë¡œ ì§€ì •í•˜ì‹œì˜¤.
 SELECT department_id||', '||first_name AS "Employee and Title"
 FROM employees;
 
---6. ±Þ¿©°¡ 12,000¸¦ ³Ñ´Â »ç¿øÀÇ ÀÌ¸§°ú ±Þ¿©¸¦ Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ½ÇÇàÇÏ½Ã¿À.
+--6. ê¸‰ì—¬ê°€ 12,000ë¥¼ ë„˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
 SELECT first_name, salary
 FROM employees
 WHERE salary > 12000;
 
---7. »ç¿ø ¹øÈ£°¡ 176ÀÎ »ç¿øÀÇ ÀÌ¸§°ú ºÎ¼­ ¹øÈ£¸¦ Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ½ÇÇàÇÏ½Ã¿À.
+--7. ì‚¬ì› ë²ˆí˜¸ê°€ 176ì¸ ì‚¬ì›ì˜ ì´ë¦„ê³¼ ë¶€ì„œ ë²ˆí˜¸ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
 SELECT first_name, department_id
 FROM employees
-WHERE department_id = 176;
+WHERE employee_id = 176;
 
---8. ±Þ¿©°¡ 5,000¿¡¼­ 12,000 »çÀÌ¿¡ Æ÷ÇÔµÇÁö ¾Ê´Â ¸ðµç »ç¿øÀÇ ÀÌ¸§°ú ±Þ¿©¸¦ Ç¥½ÃÇÏµµ·Ï ÁúÀÇ¸¦ ½ÇÇàÇÏ½Ã¿À.
+--8. ê¸‰ì—¬ê°€ 5,000ì—ì„œ 12,000 ì‚¬ì´ì— í¬í•¨ë˜ì§€ ì•ŠëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ë„ë¡ ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
 SELECT first_name, salary
 FROM employees
 WHERE salary NOT BETWEEN 5000 AND 12000;
 
---1. Ä¿¹Ì¼ÇÀ» ¹Þ´Â ¸ðµç »ç¿øÀÇ ÀÌ¸§, ±Þ¿© ¹× Ä¿¹Ì¼ÇÀ» ±Þ¿© ¹× Ä¿¹Ì¼ÇÀ» ±âÁØÀ¸·Î ³»¸²Â÷¼øÀ¸·Î Á¤·ÄÇÏ¿© Ç¥½ÃÇÏ½Ã¿À.
+--1. ì»¤ë¯¸ì…˜ì„ ë°›ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬ ë° ì»¤ë¯¸ì…˜ì„ ê¸‰ì—¬ ë° ì»¤ë¯¸ì…˜ì„ ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ì—¬ í‘œì‹œí•˜ì‹œì˜¤.
 
 SELECT DISTINCT first_name, salary, commission_pct, salary + salary * NVL(commission_pct,0) AS monthly_sal
 FROM employees
 WHERE NVL(commission_pct,0) <> 0
 ORDER BY monthly_sal DESC;
 
---2. ¾÷¹«°¡ ¿µ¾÷ »ç¿ø ¶Ç´Â »ç¹«¿øÀÌ¸é¼­ ±Þ¿©°¡ 2,500, 3,500 ¶Ç´Â 7,000ÀÌ ¾Æ´Ñ ¸ðµç »ç¿øÀÇ ÀÌ¸§, ¾÷¹« ¹× ±Þ¿©¸¦ Ç¥½ÃÇÏ½Ã¿À.
+--2. ì—…ë¬´ê°€ ì˜ì—… ì‚¬ì› ë˜ëŠ” ì‚¬ë¬´ì›ì´ë©´ì„œ ê¸‰ì—¬ê°€ 2,500, 3,500 ë˜ëŠ” 7,000ì´ ì•„ë‹Œ ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ì—…ë¬´ ë° ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ì‹œì˜¤.
 SELECT first_name, job_id, salary
 FROM employees
 WHERE job_id LIKE '%SA%' OR job_id LIKE '%CLERK%'
@@ -49,12 +49,12 @@ FROM employees
 WHERE salary NOT IN (2500, 3500, 7000);
 
 
---3. °¢ »ç¿ø¿¡ ´ëÇØ »ç¿ø ¹øÈ£, ÀÌ¸§, ±Þ¿© ¹× 15% ÀÎ»óµÈ ±Þ¿©¸¦ Á¤¼ö·Î Ç¥½ÃÇÏ½Ã¿À. ÀÎ»óµÈ ±Þ¿© ¿­ÀÇ ·¹ÀÌºíÀ» New Salary·Î ÁöÁ¤ÇÏ½Ã¿À. 
+--3. ê° ì‚¬ì›ì— ëŒ€í•´ ì‚¬ì› ë²ˆí˜¸, ì´ë¦„, ê¸‰ì—¬ ë° 15% ì¸ìƒëœ ê¸‰ì—¬ë¥¼ ì •ìˆ˜ë¡œ í‘œì‹œí•˜ì‹œì˜¤. ì¸ìƒëœ ê¸‰ì—¬ ì—´ì˜ ë ˆì´ë¸”ì„ New Salaryë¡œ ì§€ì •í•˜ì‹œì˜¤. 
 SELECT employee_id, first_name, salary, salary+salary*0.15 AS New_Salary
 FROM employees;
 
 
---4. 2¹ø ÁúÀÇ¸¦ ¼öÁ¤ÇÏ¿© »õ ±Þ¿©¿¡¼­ ÀÌÀü ±Þ¿©¸¦ »©´Â »õ ¿­À» Ãß°¡ÇÏ°í ·¹ÀÌºíÀ» Increase·Î ÁöÁ¤ÇÏ°í ¼öÁ¤ÇÑ ÁúÀÇ¸¦ ½ÇÇàÇÏ½Ã¿À.
+--4. 2ë²ˆ ì§ˆì˜ë¥¼ ìˆ˜ì •í•˜ì—¬ ìƒˆ ê¸‰ì—¬ì—ì„œ ì´ì „ ê¸‰ì—¬ë¥¼ ë¹¼ëŠ” ìƒˆ ì—´ì„ ì¶”ê°€í•˜ê³  ë ˆì´ë¸”ì„ Increaseë¡œ ì§€ì •í•˜ê³  ìˆ˜ì •í•œ ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
 
 SELECT first_name, job_id, salary*0.15 AS Increase
 FROM employees
@@ -65,37 +65,37 @@ FROM employees
 WHERE salary NOT IN (2500, 3500, 7000);
 
 
---5. ÀÌ¸§ÀÌ J, A ¶Ç´Â MÀ¸·Î ½ÃÀÛÇÏ´Â ¸ðµç »ç¿øÀÇ ÀÌ¸§(´ë¹®ÀÚ Ç¥½Ã) ¹× ÀÌ¸§ ±æÀÌ¸¦ Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ÀÛ¼ºÇÏ°í °¢ ¿­¿¡ ÀûÇÕÇÑ ·¹ÀÌºíÀ» ÁöÁ¤ÇÏ½Ã¿À.
---°á°ú¸¦ »ç¿øÀÇ ÀÌ¸§¿¡ µû¶ó Á¤·ÄÇÏ½Ã¿À.
+--5. ì´ë¦„ì´ J, A ë˜ëŠ” Mìœ¼ë¡œ ì‹œìž‘í•˜ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„(ëŒ€ë¬¸ìž í‘œì‹œ) ë° ì´ë¦„ ê¸¸ì´ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ìž‘ì„±í•˜ê³  ê° ì—´ì— ì í•©í•œ ë ˆì´ë¸”ì„ ì§€ì •í•˜ì‹œì˜¤.
+--ê²°ê³¼ë¥¼ ì‚¬ì›ì˜ ì´ë¦„ì— ë”°ë¼ ì •ë ¬í•˜ì‹œì˜¤.
 
 SELECT first_name, LENGTH(first_name)
 FROM employees
 WHERE (first_name Like 'J%' OR first_name Like 'A%' OR first_name Like 'M%')
 ORDER BY first_name;
 
---6. °¢ »ç¿øÀÇ ÀÌ¸§À» Ç¥½ÃÇÏ°í ±Ù¹« ´Þ ¼ö(ÀÔ»çÀÏ·ÎºÎÅÍ ÇöÀç±îÁöÀÇ ´Þ ¼ö)¸¦ °è»êÇÏ¿© ¿­ ·¹ÀÌºíÀ»
---MONTHS_WORKED·Î ÁöÁ¤ÇÏ½Ã¿À. °á°ú´Â Á¤¼ö·Î ¹Ý¿Ã¸²ÇÏ¿© Ç¥½ÃÇÏ°í ±Ù¹« ´Þ ¼ö¸¦ ±âÁØÀ¸·Î Á¤·ÄÇÏ½Ã¿À.
+--6. ê° ì‚¬ì›ì˜ ì´ë¦„ì„ í‘œì‹œí•˜ê³  ê·¼ë¬´ ë‹¬ ìˆ˜(ìž…ì‚¬ì¼ë¡œë¶€í„° í˜„ìž¬ê¹Œì§€ì˜ ë‹¬ ìˆ˜)ë¥¼ ê³„ì‚°í•˜ì—¬ ì—´ ë ˆì´ë¸”ì„
+--MONTHS_WORKEDë¡œ ì§€ì •í•˜ì‹œì˜¤. ê²°ê³¼ëŠ” ì •ìˆ˜ë¡œ ë°˜ì˜¬ë¦¼í•˜ì—¬ í‘œì‹œí•˜ê³  ê·¼ë¬´ ë‹¬ ìˆ˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•˜ì‹œì˜¤.
 SELECT first_name, ROUND(MONTHS_BETWEEN(SYSDATE, hire_date)) AS MONTHS_WORKED
 FROM employees
 ORDER BY MONTHS_WORKED;
 
---7. ºÎ¼­ 90ÀÇ ¸ðµç »ç¿ø¿¡ ´ëÇØ ¼º(last_name) ¹× ÀçÁ÷ ±â°£(ÁÖ ´ÜÀ§)À» Ç¥½ÃÇÏµµ·Ï query ¸¦ ÀÛ¼ºÇÏ½Ã¿À.
---ÁÖ¸¦ ³ªÅ¸³»´Â ¼ýÀÚ ¿­ÀÇ ·¹ÀÌºí·Î TENURE¸¦ ÁöÁ¤ÇÏ°í ÁÖ¸¦ ³ªÅ¸³»´Â ¼ýÀÚ °ªÀ» ¼Ò¼öÁ¡ ¿ÞÂÊ¿¡¼­ truncate ÇÏ½Ã¿À.
---±×¸®°í Á÷¿ø ÀçÁ÷ ±â°£ÀÇ ³»¸²Â÷¼øÀ¸·Î ·¹ÄÚµå¸¦ Ç¥½ÃÇÕ´Ï´Ù.
+--7. ë¶€ì„œ 90ì˜ ëª¨ë“  ì‚¬ì›ì— ëŒ€í•´ ì„±(last_name) ë° ìž¬ì§ ê¸°ê°„(ì£¼ ë‹¨ìœ„)ì„ í‘œì‹œí•˜ë„ë¡ query ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+--ì£¼ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìˆ«ìž ì—´ì˜ ë ˆì´ë¸”ë¡œ TENUREë¥¼ ì§€ì •í•˜ê³  ì£¼ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìˆ«ìž ê°’ì„ ì†Œìˆ˜ì  ì™¼ìª½ì—ì„œ truncate í•˜ì‹œì˜¤.
+--ê·¸ë¦¬ê³  ì§ì› ìž¬ì§ ê¸°ê°„ì˜ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ë ˆì½”ë“œë¥¼ í‘œì‹œí•©ë‹ˆë‹¤.
 
 SELECT last_name, TRUNC((SYSDATE-hire_date)/7, 1) AS TENURE
 FROM employees
 WHERE department_id = 90
 ORDER BY TENURE DESC;
 
---8. »ç¿øÀÇ ÀÌ¸§, ÀÔ»çÀÏ ¹× ±Þ¿© °ËÅäÀÏÀ» Ç¥½ÃÇÏ½Ã¿À. ±Þ¿© °ËÅäÀÏÀº ¿©¼¸ ´ÞÀÌ °æ°úÇÑ ÈÄ Ã¹¹øÂ° ¿ù¿äÀÏÀÔ´Ï´Ù.
--- ¿­ ·¹ÀÌºíÀ» REVIEW·Î ÁöÁ¤ÇÏ°í ³¯Â¥´Â ¡°2010.03.31 ¿ù¿äÀÏ¡±°ú °°Àº Çü½ÄÀ¸·Î Ç¥½ÃµÇµµ·Ï ÁöÁ¤ÇÏ½Ã¿À.
+--8. ì‚¬ì›ì˜ ì´ë¦„, ìž…ì‚¬ì¼ ë° ê¸‰ì—¬ ê²€í† ì¼ì„ í‘œì‹œí•˜ì‹œì˜¤. ê¸‰ì—¬ ê²€í† ì¼ì€ ì—¬ì„¯ ë‹¬ì´ ê²½ê³¼í•œ í›„ ì²«ë²ˆì§¸ ì›”ìš”ì¼ìž…ë‹ˆë‹¤.
+-- ì—´ ë ˆì´ë¸”ì„ REVIEWë¡œ ì§€ì •í•˜ê³  ë‚ ì§œëŠ” â€œ2010.03.31 ì›”ìš”ì¼â€ê³¼ ê°™ì€ í˜•ì‹ìœ¼ë¡œ í‘œì‹œë˜ë„ë¡ ì§€ì •í•˜ì‹œì˜¤.
 
-SELECT first_name, hire_date, TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date, 6), '¿ù'), 'YYYY.MM.DD DAY') AS REVIEW
+SELECT first_name, hire_date, TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date, 6), 'ì›”'), 'YYYY.MM.DD DAY') AS REVIEW
 FROM employees;
 
---9. »ç¿øÀÇ ÀÌ¸§°ú Ä¿¹Ì¼ÇÀ» Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ÀÛ¼ºÇÏ½Ã¿À. Ä¿¹Ì¼ÇÀ» ¹ÞÁö ¾Ê´Â »ç¿øÀÏ °æ¿ì ¡°No Commission¡±À» Ç¥½ÃÇÏ½Ã¿À.
---¿­ ·¹ÀÌºíÀº COMMÀ¸·Î ÁöÁ¤ÇÏ½Ã¿À.
+--9. ì‚¬ì›ì˜ ì´ë¦„ê³¼ ì»¤ë¯¸ì…˜ì„ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤. ì»¤ë¯¸ì…˜ì„ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì¼ ê²½ìš° â€œNo Commissionâ€ì„ í‘œì‹œí•˜ì‹œì˜¤.
+--ì—´ ë ˆì´ë¸”ì€ COMMìœ¼ë¡œ ì§€ì •í•˜ì‹œì˜¤.
 
 SELECT first_name, commission_pct,
         CASE WHEN NVL(commission_pct,0) <> 0 THEN commission_pct
@@ -104,8 +104,8 @@ SELECT first_name, commission_pct,
 FROM employees;
 
 
---10. CASE ±¸¹®À» »ç¿ëÇÏ¿© ´ÙÀ½ µ¥ÀÌÅÍ¿¡ µû¶ó JOB_ID ¿­ÀÇ °ªÀ» ±âÁØÀ¸·Î ¸ðµç »ç¿øÀÇ µî±ÞÀ» Ç¥½ÃÇÏ´Â ÁúÀÇ¸¦ ÀÛ¼ºÇÏ½Ã¿À.
---¾÷¹« µî±Þ
+--10. CASE êµ¬ë¬¸ì„ ì‚¬ìš©í•˜ì—¬ ë‹¤ìŒ ë°ì´í„°ì— ë”°ë¼ JOB_ID ì—´ì˜ ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ëª¨ë“  ì‚¬ì›ì˜ ë“±ê¸‰ì„ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+--ì—…ë¬´ ë“±ê¸‰
 --AD_PRES A
 --ST_MAN B
 --IT_PROG C
