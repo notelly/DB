@@ -1,124 +1,78 @@
 SELECT *
 FROM employees;
---1202
---2. EMPLOYEES í…Œì´ë¸”ì˜ êµ¬ì¡°ë¥¼ í‘œì‹œí•˜ì‹œì˜¤. ì‚¬ì› ë²ˆí˜¸ê°€ ê°€ì¥ ì•ì— ì˜¤ê³  ì´ì–´ì„œ ê° ì‚¬ì›ì˜ ì´ë¦„, ì—…ë¬´ ì½”ë“œ, ì…ì‚¬ì¼ì´ ì˜¤ë„ë¡ ì§ˆì˜ë¥¼ ì‘ì„±í•˜ì‹œì˜¤.
---HIRE_DATE ì—´ì— STARTDATEë¼ëŠ” ë³„ì¹­ì„ ì§€ì •í•˜ì‹œì˜¤. 
-DESC employees;
 
-SELECT employee_id, first_name, department_id, hire_date AS STARTDATE
-FROM employees;
-
---3. EMPLOYEES í…Œì´ë¸”ì˜ ì—…ë¬´ ì½”ë“œë¥¼ ì¤‘ë³µë˜ì§€ ì•Šê²Œ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‘ì„±í•˜ì‹œì˜¤.
-
-SELECT DISTINCT department_id
-FROM employees;
-
---5. ì—…ë¬´ IDì™€ ì´ë¦„ì„ ì—°ê²°í•œ ë‹¤ìŒ ì‰¼í‘œ ë° ê³µë°±ìœ¼ë¡œ êµ¬ë¶„í•˜ì—¬ í‘œì‹œí•˜ê³  ì—´ ì´ë¦„ì„ Employee and Titleë¡œ ì§€ì •í•˜ì‹œì˜¤.
-SELECT department_id||', '||first_name AS "Employee and Title"
-FROM employees;
-
---6. ê¸‰ì—¬ê°€ 12,000ë¥¼ ë„˜ëŠ” ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
-SELECT first_name, salary
+-- GROUP FUNTION
+--1. Á÷Ã¥º° Á÷¿ø ¼ö, ÃÖ´ë ±Ş¿©, ÃÖ¼Ò ±Ş¿©, Æò±Õ ±Ş¿©(¼Ò¼ıÁ¡ ÀÚ¸® ÇÑÀÚ¸®±îÁö Ç¥Çö)À» Á÷Ã¥ÀÌ¸§ ¼øÀ¸·Î Ãâ·Â ÇÏ½Ã¿À.
+-- Á÷Ã¥ÀÌ ¾ø´Âµ¥...?
+SELECT job_id, COUNT(job_id), MAX(salary), MIN(salary), ROUND(AVG(salary),1)
 FROM employees
-WHERE salary > 12000;
+GROUP BY job_id
+ORDER BY job_id;
 
---7. ì‚¬ì› ë²ˆí˜¸ê°€ 176ì¸ ì‚¬ì›ì˜ ì´ë¦„ê³¼ ë¶€ì„œ ë²ˆí˜¸ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
-SELECT first_name, department_id
+--2. ±Ù¼Ó³â¼ö°¡ 15³â ÀÌ»óÀÎ »ç¿ø¿¡ ´ëÇØ¼­ ºÎ¼­º°·Î ¾ó¸¶³ª ¸¹Àº ±Ş¿©°¡ Áö±ŞµÇ´ÂÁö ¾Ë°í ½Í´Ù.
+--ºÎ¼­º° ÇØ´ç »ç¿øÀÌ 3¸í ÀÌ»óÀÎ ºÎ¼­¸¸ ºÎ¼­¹øÈ£, ºÎ¼­º° ±Ş¿©ÇÕ°è¸¦ ±Ş¿©ÇÕ°è°¡ ³ôÀº ¼øÀ¸·Î Ãâ·ÂÇÏ¶ó.
+SELECT department_id, SUM(department_id)
 FROM employees
-WHERE employee_id = 176;
+GROUP BY department_id
+HAVING COUNT(department_id) >=3
+ORDER BY department_id DESC;
 
---8. ê¸‰ì—¬ê°€ 5,000ì—ì„œ 12,000 ì‚¬ì´ì— í¬í•¨ë˜ì§€ ì•ŠëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„ê³¼ ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ë„ë¡ ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
-SELECT first_name, salary
+--JOIN
+
+SELECT *
+FROM locations;
+
+SELECT *
+FROM departments;
+
+SELECT *
 FROM employees
-WHERE salary NOT BETWEEN 5000 AND 12000;
+ORDER BY department_id;
 
---1. ì»¤ë¯¸ì…˜ì„ ë°›ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ê¸‰ì—¬ ë° ì»¤ë¯¸ì…˜ì„ ê¸‰ì—¬ ë° ì»¤ë¯¸ì…˜ì„ ê¸°ì¤€ìœ¼ë¡œ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ì •ë ¬í•˜ì—¬ í‘œì‹œí•˜ì‹œì˜¤.
+--1. LOCATIONS ¹× COUNTRIES Å×ÀÌºíÀ» »ç¿ëÇÏ¿© HR ºÎ¼­¸¦ À§ÇØ ¸ğµç ºÎ¼­ÀÇ ÁÖ¼Ò¸¦ »ı¼ºÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+--Ãâ·Â¿¡ À§Ä¡ ID, ÁÖ¼Ò, ±¸/±º, ½Ã/µµ ¹× ±¹°¡¸¦ Ç¥½ÃÇÏ¸ç, NATURAL JOINÀ» »ç¿ëÇÏ¿© °á°ú¸¦ »ı¼ºÇÕ´Ï´Ù.
+SELECT department_name, location_id, state_province, city, country_name
+FROM departments NATURAL JOIN locations NATURAL JOIN countries;
 
-SELECT DISTINCT first_name, salary, commission_pct, salary + salary * NVL(commission_pct,0) AS monthly_sal
-FROM employees
-WHERE NVL(commission_pct,0) <> 0
-ORDER BY monthly_sal DESC;
+--2. ¸ğµç »ç¿øÀÇ ¼º, ¼Ò¼Ó ºÎ¼­¹øÈ£ ¹× ºÎ¼­ ÀÌ¸§À» Ç¥½ÃÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e, departments d
+WHERE e.department_id = d.department_id(+);
 
---2. ì—…ë¬´ê°€ ì˜ì—… ì‚¬ì› ë˜ëŠ” ì‚¬ë¬´ì›ì´ë©´ì„œ ê¸‰ì—¬ê°€ 2,500, 3,500 ë˜ëŠ” 7,000ì´ ì•„ë‹Œ ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ì—…ë¬´ ë° ê¸‰ì—¬ë¥¼ í‘œì‹œí•˜ì‹œì˜¤.
-SELECT first_name, job_id, salary
-FROM employees
-WHERE job_id LIKE '%SA%' OR job_id LIKE '%CLERK%'
-INTERSECT
-SELECT first_name, job_id, salary
-FROM employees
-WHERE salary NOT IN (2500, 3500, 7000);
-
-
---3. ê° ì‚¬ì›ì— ëŒ€í•´ ì‚¬ì› ë²ˆí˜¸, ì´ë¦„, ê¸‰ì—¬ ë° 15% ì¸ìƒëœ ê¸‰ì—¬ë¥¼ ì •ìˆ˜ë¡œ í‘œì‹œí•˜ì‹œì˜¤. ì¸ìƒëœ ê¸‰ì—¬ ì—´ì˜ ë ˆì´ë¸”ì„ New Salaryë¡œ ì§€ì •í•˜ì‹œì˜¤. 
-SELECT employee_id, first_name, salary, salary+salary*0.15 AS New_Salary
-FROM employees;
+--3. Toronto¿¡ ±Ù¹«ÇÏ´Â »ç¿ø¿¡ ´ëÇÑ º¸°í¼­¸¦ ÇÊ¿ä·Î ÇÕ´Ï´Ù. toronto¿¡¼­ ±Ù¹«ÇÏ´Â ¸ğµç »ç¿øÀÇ ¼º, Á÷¹«, ºÎ¼­
+--¹øÈ£ ¹× ºÎ¼­ ÀÌ¸§À» Ç¥½ÃÇÏ½Ã¿À. (ÈùÆ® : 3-way join »ç¿ë)
+SELECT e.last_name, e.job_id, d.department_id, d.department_name
+FROM employees e JOIN departments d ON e.department_id = d.department_id
+JOIN locations l ON d.location_id = l.location_id
+WHERE l.city = 'Toronto';
 
 
---4. 2ë²ˆ ì§ˆì˜ë¥¼ ìˆ˜ì •í•˜ì—¬ ìƒˆ ê¸‰ì—¬ì—ì„œ ì´ì „ ê¸‰ì—¬ë¥¼ ë¹¼ëŠ” ìƒˆ ì—´ì„ ì¶”ê°€í•˜ê³  ë ˆì´ë¸”ì„ Increaseë¡œ ì§€ì •í•˜ê³  ìˆ˜ì •í•œ ì§ˆì˜ë¥¼ ì‹¤í–‰í•˜ì‹œì˜¤.
-
-SELECT first_name, job_id, salary*0.15 AS Increase
-FROM employees
-WHERE job_id LIKE '%SA%' OR job_id LIKE '%CLERK%'
-INTERSECT
-SELECT first_name, job_id, salary*0.15 AS Increase
-FROM employees
-WHERE salary NOT IN (2500, 3500, 7000);
+--4. »ç¿øÀÇ ¼º ¹× »ç¿ø ¹øÈ£¸¦ ÇØ´ç °ü¸®ÀÚÀÇ ¼º ¹× °ü¸®ÀÚ ¹øÈ£¿Í ÇÔ²² Ç¥½ÃÇÏ´Â º¸°í¼­¸¦ ÀÛ¼ºÇÏ´Âµ¥, ¿­ ·¹ÀÌºíÀ»
+--°¢°¢ Employee, Emp#, Manager ¹× Mgr#À¸·Î ÁöÁ¤ÇÏ½Ã¿À.
+SELECT emp.last_name, emp.employee_id, Mgr.last_name, Mgr.employee_id
+FROM employees Emp, employees Mgr
+WHERE Emp.manager_id = Mgr.employee_id;
 
 
---5. ì´ë¦„ì´ J, A ë˜ëŠ” Mìœ¼ë¡œ ì‹œì‘í•˜ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„(ëŒ€ë¬¸ì í‘œì‹œ) ë° ì´ë¦„ ê¸¸ì´ë¥¼ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‘ì„±í•˜ê³  ê° ì—´ì— ì í•©í•œ ë ˆì´ë¸”ì„ ì§€ì •í•˜ì‹œì˜¤.
---ê²°ê³¼ë¥¼ ì‚¬ì›ì˜ ì´ë¦„ì— ë”°ë¼ ì •ë ¬í•˜ì‹œì˜¤.
+--5. King°ú °°ÀÌ ÇØ´ç °ü¸®ÀÚ°¡ ÁöÁ¤µÇÁö ¾ÊÀº ¸ğµç »ç¿øÀ» Ç¥½ÃÇÏµµ·Ï 4¹ø ¹®ÀåÀ» ¼öÁ¤ÇÕ´Ï´Ù.
+--»ç¿ø ¹øÈ£¼øÀ¸·Î °á°ú¸¦ Á¤·ÄÇÏ½Ã¿À. 
 
-SELECT first_name, LENGTH(first_name)
-FROM employees
-WHERE (first_name Like 'J%' OR first_name Like 'A%' OR first_name Like 'M%')
-ORDER BY first_name;
+SELECT emp.last_name, emp.employee_id, Mgr.last_name, Mgr.employee_id
+FROM employees Emp, employees Mgr
+WHERE Emp.manager_id = Mgr.employee_id(+)
+ORDER BY emp.employee_id;
 
---6. ê° ì‚¬ì›ì˜ ì´ë¦„ì„ í‘œì‹œí•˜ê³  ê·¼ë¬´ ë‹¬ ìˆ˜(ì…ì‚¬ì¼ë¡œë¶€í„° í˜„ì¬ê¹Œì§€ì˜ ë‹¬ ìˆ˜)ë¥¼ ê³„ì‚°í•˜ì—¬ ì—´ ë ˆì´ë¸”ì„
---MONTHS_WORKEDë¡œ ì§€ì •í•˜ì‹œì˜¤. ê²°ê³¼ëŠ” ì •ìˆ˜ë¡œ ë°˜ì˜¬ë¦¼í•˜ì—¬ í‘œì‹œí•˜ê³  ê·¼ë¬´ ë‹¬ ìˆ˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬í•˜ì‹œì˜¤.
-SELECT first_name, ROUND(MONTHS_BETWEEN(SYSDATE, hire_date)) AS MONTHS_WORKED
-FROM employees
-ORDER BY MONTHS_WORKED;
+--6. »ç¿øÀÇ ¼º°ú ºÎ¼­ ¹øÈ£ ¹× ÁÖ¾îÁø »ç¿ø°ú µ¿ÀÏÇÑ ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â ¸ğµç »ç¿øÀ» Ç¥½ÃÇÏ´Â º¸°í¼­¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+--°¢ ¿­¿¡ ÀûÀıÇÑ ·¹ÀÌºíÀ» ÀÚÀ¯·Ó°Ô ÁöÁ¤ÇØ º¾´Ï´Ù.
+SELECT e.last_name, e.department_id, d.department_name
+FROM employees e, departments d
+WHERE e.department_id = d.department_id
+AND e.department_id = 110;
 
---7. ë¶€ì„œ 90ì˜ ëª¨ë“  ì‚¬ì›ì— ëŒ€í•´ ì„±(last_name) ë° ì¬ì§ ê¸°ê°„(ì£¼ ë‹¨ìœ„)ì„ í‘œì‹œí•˜ë„ë¡ query ë¥¼ ì‘ì„±í•˜ì‹œì˜¤.
---ì£¼ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìˆ«ì ì—´ì˜ ë ˆì´ë¸”ë¡œ TENUREë¥¼ ì§€ì •í•˜ê³  ì£¼ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ìˆ«ì ê°’ì„ ì†Œìˆ˜ì  ì™¼ìª½ì—ì„œ truncate í•˜ì‹œì˜¤.
---ê·¸ë¦¬ê³  ì§ì› ì¬ì§ ê¸°ê°„ì˜ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ë ˆì½”ë“œë¥¼ í‘œì‹œí•©ë‹ˆë‹¤.
+SELECT last_name, department_id, department_name
+FROM employees NATURAL JOIN departments
+WHERE department_id = 90;
+--KINGÀÌ ¾È ¶ß´Â ÀÌÀ¯´Â?
 
-SELECT last_name, TRUNC((SYSDATE-hire_date)/7, 1) AS TENURE
-FROM employees
-WHERE department_id = 90
-ORDER BY TENURE DESC;
-
---8. ì‚¬ì›ì˜ ì´ë¦„, ì…ì‚¬ì¼ ë° ê¸‰ì—¬ ê²€í† ì¼ì„ í‘œì‹œí•˜ì‹œì˜¤. ê¸‰ì—¬ ê²€í† ì¼ì€ ì—¬ì„¯ ë‹¬ì´ ê²½ê³¼í•œ í›„ ì²«ë²ˆì§¸ ì›”ìš”ì¼ì…ë‹ˆë‹¤.
--- ì—´ ë ˆì´ë¸”ì„ REVIEWë¡œ ì§€ì •í•˜ê³  ë‚ ì§œëŠ” â€œ2010.03.31 ì›”ìš”ì¼â€ê³¼ ê°™ì€ í˜•ì‹ìœ¼ë¡œ í‘œì‹œë˜ë„ë¡ ì§€ì •í•˜ì‹œì˜¤.
-
-SELECT first_name, hire_date, TO_CHAR(NEXT_DAY(ADD_MONTHS(hire_date, 6), 'ì›”'), 'YYYY.MM.DD DAY') AS REVIEW
-FROM employees;
-
---9. ì‚¬ì›ì˜ ì´ë¦„ê³¼ ì»¤ë¯¸ì…˜ì„ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‘ì„±í•˜ì‹œì˜¤. ì»¤ë¯¸ì…˜ì„ ë°›ì§€ ì•ŠëŠ” ì‚¬ì›ì¼ ê²½ìš° â€œNo Commissionâ€ì„ í‘œì‹œí•˜ì‹œì˜¤.
---ì—´ ë ˆì´ë¸”ì€ COMMìœ¼ë¡œ ì§€ì •í•˜ì‹œì˜¤.
---TO_CHARë¥¼ ë„£ì–´ì£¼ì–´ì•¼ ì˜¤ë¥˜ê°€ 
-SELECT first_name, NVL(TO_CHAR(commission_pct), 'No Commission') AS COMM
-FROM employees;
-
-
---10. CASE êµ¬ë¬¸ì„ ì‚¬ìš©í•˜ì—¬ ë‹¤ìŒ ë°ì´í„°ì— ë”°ë¼ JOB_ID ì—´ì˜ ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ëª¨ë“  ì‚¬ì›ì˜ ë“±ê¸‰ì„ í‘œì‹œí•˜ëŠ” ì§ˆì˜ë¥¼ ì‘ì„±í•˜ì‹œì˜¤.
---ì—…ë¬´ ë“±ê¸‰
---AD_PRES A
---ST_MAN B
---IT_PROG C
---SA_REP D
---ST_CLERK E
---None of the above 0
-
-
-SELECT job_id,
-       CASE job_id WHEN 'AD_PRES' THEN  'A'
-                   WHEN 'ST_MAN' THEN  'B'
-                   WHEN 'IT_PROG' THEN  'C'
-                   WHEN 'SA_REP' THEN  'D'
-                   WHEN 'ST_CLERK' THEN  'E'
-                   ELSE 'None of the above 0'
-       END
-       AS employee_grade
-FROM employees;
-
+--7. HR ºÎ¼­¿¡¼­ Á÷¹« µî±Ş ¹× ±Ş¿©¿¡ ´ëÇÑ º¸°í¼­¸¦ ÇÊ¿ä·Î ÇÕ´Ï´Ù. ¸ÕÀú JOB_GRADES Å×ÀÌºíÀÇ ±¸Á¶¸¦ Ç¥½ÃÇÑ ´ÙÀ½
+--¸ğµç »ç¿øÀÇ ÀÌ¸§, Á÷¹«, ºÎ¼­ ÀÌ¸§, ±Ş¿© ¹× µî±ŞÀ» Ç¥½ÃÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
