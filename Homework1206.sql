@@ -2,15 +2,15 @@ SELECT *
 FROM employees;
 
 -- GROUP FUNTION
---1. Á÷Ã¥º° Á÷¿ø ¼ö, ÃÖ´ë ±Þ¿©, ÃÖ¼Ò ±Þ¿©, Æò±Õ ±Þ¿©(¼Ò¼ýÁ¡ ÀÚ¸® ÇÑÀÚ¸®±îÁö Ç¥Çö)À» Á÷Ã¥ÀÌ¸§ ¼øÀ¸·Î Ãâ·Â ÇÏ½Ã¿À.
--- Á÷Ã¥ÀÌ ¾ø´Âµ¥...?
+--1. ì§ì±…ë³„ ì§ì› ìˆ˜, ìµœëŒ€ ê¸‰ì—¬, ìµœì†Œ ê¸‰ì—¬, í‰ê·  ê¸‰ì—¬(ì†Œìˆ«ì  ìžë¦¬ í•œìžë¦¬ê¹Œì§€ í‘œí˜„)ì„ ì§ì±…ì´ë¦„ ìˆœìœ¼ë¡œ ì¶œë ¥ í•˜ì‹œì˜¤.
+-- ì§ì±…ì´ ì—†ëŠ”ë°...?
 SELECT job_id, COUNT(job_id), MAX(salary), MIN(salary), ROUND(AVG(salary),1)
 FROM employees
 GROUP BY job_id
 ORDER BY job_id;
 
---2. ±Ù¼Ó³â¼ö°¡ 15³â ÀÌ»óÀÎ »ç¿ø¿¡ ´ëÇØ¼­ ºÎ¼­º°·Î ¾ó¸¶³ª ¸¹Àº ±Þ¿©°¡ Áö±ÞµÇ´ÂÁö ¾Ë°í ½Í´Ù.
---ºÎ¼­º° ÇØ´ç »ç¿øÀÌ 3¸í ÀÌ»óÀÎ ºÎ¼­¸¸ ºÎ¼­¹øÈ£, ºÎ¼­º° ±Þ¿©ÇÕ°è¸¦ ±Þ¿©ÇÕ°è°¡ ³ôÀº ¼øÀ¸·Î Ãâ·ÂÇÏ¶ó.
+--2. ê·¼ì†ë…„ìˆ˜ê°€ 15ë…„ ì´ìƒì¸ ì‚¬ì›ì— ëŒ€í•´ì„œ ë¶€ì„œë³„ë¡œ ì–¼ë§ˆë‚˜ ë§Žì€ ê¸‰ì—¬ê°€ ì§€ê¸‰ë˜ëŠ”ì§€ ì•Œê³  ì‹¶ë‹¤.
+--ë¶€ì„œë³„ í•´ë‹¹ ì‚¬ì›ì´ 3ëª… ì´ìƒì¸ ë¶€ì„œë§Œ ë¶€ì„œë²ˆí˜¸, ë¶€ì„œë³„ ê¸‰ì—¬í•©ê³„ë¥¼ ê¸‰ì—¬í•©ê³„ê°€ ë†’ì€ ìˆœìœ¼ë¡œ ì¶œë ¥í•˜ë¼.
 SELECT department_id, SUM(department_id)
 FROM employees
 GROUP BY department_id
@@ -29,41 +29,41 @@ SELECT *
 FROM employees
 ORDER BY department_id;
 
---1. LOCATIONS ¹× COUNTRIES Å×ÀÌºíÀ» »ç¿ëÇÏ¿© HR ºÎ¼­¸¦ À§ÇØ ¸ðµç ºÎ¼­ÀÇ ÁÖ¼Ò¸¦ »ý¼ºÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
---Ãâ·Â¿¡ À§Ä¡ ID, ÁÖ¼Ò, ±¸/±º, ½Ã/µµ ¹× ±¹°¡¸¦ Ç¥½ÃÇÏ¸ç, NATURAL JOINÀ» »ç¿ëÇÏ¿© °á°ú¸¦ »ý¼ºÇÕ´Ï´Ù.
+--1. LOCATIONS ë° COUNTRIES í…Œì´ë¸”ì„ ì‚¬ìš©í•˜ì—¬ HR ë¶€ì„œë¥¼ ìœ„í•´ ëª¨ë“  ë¶€ì„œì˜ ì£¼ì†Œë¥¼ ìƒì„±í•˜ëŠ” queryë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+--ì¶œë ¥ì— ìœ„ì¹˜ ID, ì£¼ì†Œ, êµ¬/êµ°, ì‹œ/ë„ ë° êµ­ê°€ë¥¼ í‘œì‹œí•˜ë©°, NATURAL JOINì„ ì‚¬ìš©í•˜ì—¬ ê²°ê³¼ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
 SELECT department_name, location_id, state_province, city, country_name
 FROM departments NATURAL JOIN locations NATURAL JOIN countries;
 
---2. ¸ðµç »ç¿øÀÇ ¼º, ¼Ò¼Ó ºÎ¼­¹øÈ£ ¹× ºÎ¼­ ÀÌ¸§À» Ç¥½ÃÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+--2. ëª¨ë“  ì‚¬ì›ì˜ ì„±, ì†Œì† ë¶€ì„œë²ˆí˜¸ ë° ë¶€ì„œ ì´ë¦„ì„ í‘œì‹œí•˜ëŠ” queryë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT e.last_name, e.department_id, d.department_name
 FROM employees e, departments d
 WHERE e.department_id = d.department_id(+);
 
---3. Toronto¿¡ ±Ù¹«ÇÏ´Â »ç¿ø¿¡ ´ëÇÑ º¸°í¼­¸¦ ÇÊ¿ä·Î ÇÕ´Ï´Ù. toronto¿¡¼­ ±Ù¹«ÇÏ´Â ¸ðµç »ç¿øÀÇ ¼º, Á÷¹«, ºÎ¼­
---¹øÈ£ ¹× ºÎ¼­ ÀÌ¸§À» Ç¥½ÃÇÏ½Ã¿À. (ÈùÆ® : 3-way join »ç¿ë)
+--3. Torontoì— ê·¼ë¬´í•˜ëŠ” ì‚¬ì›ì— ëŒ€í•œ ë³´ê³ ì„œë¥¼ í•„ìš”ë¡œ í•©ë‹ˆë‹¤. torontoì—ì„œ ê·¼ë¬´í•˜ëŠ” ëª¨ë“  ì‚¬ì›ì˜ ì„±, ì§ë¬´, ë¶€ì„œ
+--ë²ˆí˜¸ ë° ë¶€ì„œ ì´ë¦„ì„ í‘œì‹œí•˜ì‹œì˜¤. (ížŒíŠ¸ : 3-way join ì‚¬ìš©)
 SELECT e.last_name, e.job_id, d.department_id, d.department_name
 FROM employees e JOIN departments d ON e.department_id = d.department_id
 JOIN locations l ON d.location_id = l.location_id
 WHERE l.city = 'Toronto';
 
 
---4. »ç¿øÀÇ ¼º ¹× »ç¿ø ¹øÈ£¸¦ ÇØ´ç °ü¸®ÀÚÀÇ ¼º ¹× °ü¸®ÀÚ ¹øÈ£¿Í ÇÔ²² Ç¥½ÃÇÏ´Â º¸°í¼­¸¦ ÀÛ¼ºÇÏ´Âµ¥, ¿­ ·¹ÀÌºíÀ»
---°¢°¢ Employee, Emp#, Manager ¹× Mgr#À¸·Î ÁöÁ¤ÇÏ½Ã¿À.
+--4. ì‚¬ì›ì˜ ì„± ë° ì‚¬ì› ë²ˆí˜¸ë¥¼ í•´ë‹¹ ê´€ë¦¬ìžì˜ ì„± ë° ê´€ë¦¬ìž ë²ˆí˜¸ì™€ í•¨ê»˜ í‘œì‹œí•˜ëŠ” ë³´ê³ ì„œë¥¼ ìž‘ì„±í•˜ëŠ”ë°, ì—´ ë ˆì´ë¸”ì„
+--ê°ê° Employee, Emp#, Manager ë° Mgr#ìœ¼ë¡œ ì§€ì •í•˜ì‹œì˜¤.
 SELECT emp.last_name, emp.employee_id, Mgr.last_name, Mgr.employee_id
 FROM employees Emp, employees Mgr
 WHERE Emp.manager_id = Mgr.employee_id;
 
 
---5. King°ú °°ÀÌ ÇØ´ç °ü¸®ÀÚ°¡ ÁöÁ¤µÇÁö ¾ÊÀº ¸ðµç »ç¿øÀ» Ç¥½ÃÇÏµµ·Ï 4¹ø ¹®ÀåÀ» ¼öÁ¤ÇÕ´Ï´Ù.
---»ç¿ø ¹øÈ£¼øÀ¸·Î °á°ú¸¦ Á¤·ÄÇÏ½Ã¿À. 
+--5. Kingê³¼ ê°™ì´ í•´ë‹¹ ê´€ë¦¬ìžê°€ ì§€ì •ë˜ì§€ ì•Šì€ ëª¨ë“  ì‚¬ì›ì„ í‘œì‹œí•˜ë„ë¡ 4ë²ˆ ë¬¸ìž¥ì„ ìˆ˜ì •í•©ë‹ˆë‹¤.
+--ì‚¬ì› ë²ˆí˜¸ìˆœìœ¼ë¡œ ê²°ê³¼ë¥¼ ì •ë ¬í•˜ì‹œì˜¤. 
 
 SELECT emp.last_name, emp.employee_id, Mgr.last_name, Mgr.employee_id
 FROM employees Emp, employees Mgr
 WHERE Emp.manager_id = Mgr.employee_id(+)
 ORDER BY emp.employee_id;
 
---6. »ç¿øÀÇ ¼º°ú ºÎ¼­ ¹øÈ£ ¹× ÁÖ¾îÁø »ç¿ø°ú µ¿ÀÏÇÑ ºÎ¼­¿¡ ±Ù¹«ÇÏ´Â ¸ðµç »ç¿øÀ» Ç¥½ÃÇÏ´Â º¸°í¼­¸¦ ÀÛ¼ºÇÏ½Ã¿À.
---°¢ ¿­¿¡ ÀûÀýÇÑ ·¹ÀÌºíÀ» ÀÚÀ¯·Ó°Ô ÁöÁ¤ÇØ º¾´Ï´Ù.
+--6. ì‚¬ì›ì˜ ì„±ê³¼ ë¶€ì„œ ë²ˆí˜¸ ë° ì£¼ì–´ì§„ ì‚¬ì›ê³¼ ë™ì¼í•œ ë¶€ì„œì— ê·¼ë¬´í•˜ëŠ” ëª¨ë“  ì‚¬ì›ì„ í‘œì‹œí•˜ëŠ” ë³´ê³ ì„œë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+--ê° ì—´ì— ì ì ˆí•œ ë ˆì´ë¸”ì„ ìžìœ ë¡­ê²Œ ì§€ì •í•´ ë´…ë‹ˆë‹¤.
 SELECT e.last_name, e.department_id, d.department_name
 FROM employees e, departments d
 WHERE e.department_id = d.department_id
@@ -72,7 +72,12 @@ AND e.department_id = 110;
 SELECT last_name, department_id, department_name
 FROM employees NATURAL JOIN departments
 WHERE department_id = 90;
---KINGÀÌ ¾È ¶ß´Â ÀÌÀ¯´Â?
+--KINGì´ ì•ˆ ëœ¨ëŠ” ì´ìœ ëŠ”?
 
---7. HR ºÎ¼­¿¡¼­ Á÷¹« µî±Þ ¹× ±Þ¿©¿¡ ´ëÇÑ º¸°í¼­¸¦ ÇÊ¿ä·Î ÇÕ´Ï´Ù. ¸ÕÀú JOB_GRADES Å×ÀÌºíÀÇ ±¸Á¶¸¦ Ç¥½ÃÇÑ ´ÙÀ½
---¸ðµç »ç¿øÀÇ ÀÌ¸§, Á÷¹«, ºÎ¼­ ÀÌ¸§, ±Þ¿© ¹× µî±ÞÀ» Ç¥½ÃÇÏ´Â query¸¦ ÀÛ¼ºÇÏ½Ã¿À.
+--7. HR ë¶€ì„œì—ì„œ ì§ë¬´ ë“±ê¸‰ ë° ê¸‰ì—¬ì— ëŒ€í•œ ë³´ê³ ì„œë¥¼ í•„ìš”ë¡œ í•©ë‹ˆë‹¤. ë¨¼ì € JOB_GRADES í…Œì´ë¸”ì˜ êµ¬ì¡°ë¥¼ í‘œì‹œí•œ ë‹¤ìŒ
+--ëª¨ë“  ì‚¬ì›ì˜ ì´ë¦„, ì§ë¬´, ë¶€ì„œ ì´ë¦„, ê¸‰ì—¬ ë° ë“±ê¸‰ì„ í‘œì‹œí•˜ëŠ” queryë¥¼ ìž‘ì„±í•˜ì‹œì˜¤.
+SELECT *
+FROM job_grades;
+
+SELECT last_name, job_title, department_name, salary, grade_level
+FROM employees NATURAL JOIN jobs NATURAL JOIN job_grades NATURAL JOIN departments;
